@@ -99,7 +99,7 @@ bool cv_mat_copy_to_with_mask(Mat self, Mat dst, Mat mask) {
     catch_exceptions(false);
 }
 
-bool cv_mat_convert_to(Mat self, Mat dst, int type) {
+bool cv_mat_convert_to(Mat self, Mat dst, int type, double alpha, double beta) {
     try {
         self->convertTo(*dst, type);
         return true;
@@ -249,7 +249,7 @@ void * cv_mat_get_ptr(Mat m, const int * idx) {
     catch_exceptions(nullptr);
 }
 
-bool cv_mat_set_int(Mat m, const int *idx, int n_idx, int val) {
+bool cv_mat_set_int(Mat m, const int *idx, int val) {
     try {
         switch (m->depth()) {
             case CV_8U:
@@ -281,7 +281,7 @@ bool cv_mat_set_int(Mat m, const int *idx, int n_idx, int val) {
     catch_exceptions(false);
 }
 
-bool cv_mat_set_double(Mat m, const int *idx, int n_idx, double val) {
+bool cv_mat_set_double(Mat m, const int *idx, double val) {
     try {
         switch (m->depth()) {
             case CV_32F:
@@ -313,7 +313,7 @@ bool cv_mat_set_double(Mat m, const int *idx, int n_idx, double val) {
     catch_exceptions(false);
 }
 
-int64 cv_get_tick_count() {
+int64_t cv_get_tick_count() {
     return cv::getTickCount();
 }
 

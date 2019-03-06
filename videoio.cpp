@@ -8,18 +8,18 @@ void cv_video_capture_free(VideoCapture v) {
     delete v;
 }
 
-bool cv_video_capture_open_uri(VideoCapture v, const char* uri) {
+bool cv_video_capture_open_uri(VideoCapture v, const char* uri, int api_preference) {
     try {
-        auto result = v->open(uri);
+        auto result = v->open(uri, api_preference);
         if (!result) cv_set_error("Can't read from URI.");
         return result;
     }
     catch_exceptions(false);
 }
 
-bool cv_video_capture_open_device(VideoCapture v, int device) {
+bool cv_video_capture_open_device(VideoCapture v, int device, int api_preference) {
     try {
-        auto result = v->open(device);
+        auto result = v->open(device, api_preference);
         if (!result) cv_set_error("Can't open device.");
         return result;
     }

@@ -29,7 +29,7 @@ bool cv_dnn_net_forward_layers(Net net, Strings layer_names, Mats out_blobs);
 
 void cv_dnn_net_set_preferable_backend(Net net, int backend);
 void cv_dnn_net_set_preferable_target(Net net, int target);
-int64_t cv_dnn_net_get_perf_profile(Net net);
+int64_t cv_dnn_net_get_perf_profile(Net net, Doubles out_layers);
 
 bool cv_dnn_blob_from_images(Mats images,
                              Mat out_blob,

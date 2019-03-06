@@ -11,9 +11,9 @@ extern "C" {
 #include "core.h"
 
 Mat cv_imread(const char* filename, int flags);
-bool cv_imwrite(const char* filename, Mat img, Ints params);
-
 Mat cv_imdecode(char * buf, int flags);
+
+bool cv_imwrite(const char* filename, Mat img, Ints params);
 Buffer cv_imencode(const char* file_ext, Mat img, Ints params);
 
 #ifdef __cplusplus

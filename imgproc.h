@@ -18,16 +18,15 @@ bool cv_resize(Mat src, Mat dst, Size dsize, double fx, double fy, int interpola
 void cv_line(Mat img, Point pt1, Point pt2, Scalar color, int thickness, int line_type, int shift);
 void cv_arrowed_line(Mat img, Point pt1, Point pt2, Scalar color,
                     int thickness, int line_type, int shift, double tipLength);
-void cv_circle(Mat img, Point center, int radius, Scalar color, int thickness, int lineType, int shift);
+void cv_circle(Mat img, Point center, int radius, Scalar color, int thickness, int line_type, int shift);
 void cv_ellipse(Mat img, Point center, Size axes,
-                double angle, double startAngle, double endAngle,
-                Scalar color, int thickness, int lineType, int shift);
+                double angle, double start_angle, double end_angle,
+                Scalar color, int thickness, int line_type, int shift);
 void cv_rectangle(Mat img, Rect rect, Scalar color, int thickness, int lineType, int shift);
 
-Size cv_get_text_size(const char* text, int fontFace, double fontScale, int thickness, int * baseLine);
-bool cv_put_text(Mat img, const char* text, Point org, int fontFace, double fontScale,
-                Scalar color, int thickness, int lineType, bool bottomLeftOrigin);
-
+Size cv_get_text_size(const char* text, int font_face, double font_scale, int thickness, int * base_line);
+bool cv_put_text(Mat img, const char* text, Point org, int font_face, double font_scale,
+                 Scalar color, int thickness, int line_type, bool bottom_left_origin);
 
 #ifdef __cplusplus
 }

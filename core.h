@@ -47,8 +47,8 @@ void cv_mat_free(Mat m);
 bool cv_mat_empty(Mat m);
 
 bool cv_mat_copy_to(Mat m, Mat dst);
-bool cv_mat_copy_to_to_with_mask(Mat m, Mat dst, Mat mask);
-bool cv_mat_convert_to(Mat m, Ints shape);
+bool cv_mat_copy_to_with_mask(Mat m, Mat dst, Mat mask);
+bool cv_mat_convert_to(Mat self, Mat dst, int type, double alpha, double beta);
 Buffer cv_mat_to_buffer(Mat m);
 
 void cv_mat_patch_nans(Mat m, double val);
@@ -64,20 +64,20 @@ bool cv_mat_is_continuous(Mat m);
 size_t cv_mat_total(Mat m);
 
 int cv_mat_dims(Mat m);
-void cv_mat_size(Mat m, int * size);
+Ints cv_mat_size(Mat self);
 int cv_mat_rows(Mat m);
 int cv_mat_cols(Mat m);
 
-Mat cv_mat_reshape(Mat m, int cn, int dims, int * sizes);
+Mat cv_mat_reshape(Mat m, int cn, Ints shape);
 
-int32_t cv_mat_get_int(Mat m, const int *idx);
+int32_t cv_mat_get_int(Mat m, const int * idx);
 double cv_mat_get_double(Mat m, const int * idx);
 void * cv_mat_get_ptr(Mat m, const int * idx);
 
-bool cv_mat_set_int(Mat m, const int *idx, int n_idx, int val);
-bool cv_mat_set_double(Mat m, const int *idx, int n_idx, double val);
+bool cv_mat_set_int(Mat m, const int * idx, int val);
+bool cv_mat_set_double(Mat m, const int * idx, double val);
 
-int64 cv_get_tick_count();
+int64_t cv_get_tick_count();
 double cv_get_tick_frequency();
 
 #ifdef __cplusplus

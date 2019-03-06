@@ -20,8 +20,8 @@ typedef void* VideoWriter;
 VideoCapture cv_video_capture_new();
 void cv_video_capture_free(VideoCapture v);
 
-bool cv_video_capture_open_uri(VideoCapture v, const char* uri);
-bool cv_video_capture_open_device(VideoCapture v, int device);
+bool cv_video_capture_open_uri(VideoCapture v, const char* uri, int api_preference);
+bool cv_video_capture_open_device(VideoCapture v, int device, int api_preference);
 void cv_video_capture_set(VideoCapture v, int prop, double param);
 double cv_video_capture_get(VideoCapture v, int prop);
 bool cv_video_capture_is_opened(VideoCapture v);

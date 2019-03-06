@@ -11,7 +11,7 @@ extern "C" {
 void cv_named_window(const char* winname, int flags);
 void cv_destroy_window(const char* winname);
 void cv_destroy_all_windows();
-void cv_imshow(const char* winname, Mat mat);
+bool cv_imshow(const char* winname, Mat mat);
 double cv_get_window_property(const char* winname, int flag);
 void cv_set_window_property(const char* winname, int flag, double value);
 void cv_set_window_title(const char* winname, const char* title);

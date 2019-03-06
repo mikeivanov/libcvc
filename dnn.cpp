@@ -54,8 +54,7 @@ void cv_dnn_net_set_preferable_target(Net net, int target) {
 }
 
 int64_t cv_dnn_net_get_perf_profile(Net net, Doubles out_layers) {
-    auto times = new std::vector<double>();
-    return net->getPerfProfile(*times);
+    return net->getPerfProfile(*out_layers);
 }
 
 bool cv_dnn_blob_from_images(Mats images,

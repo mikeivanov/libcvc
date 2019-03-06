@@ -13,8 +13,12 @@ void cv_destroy_all_windows() {
     cv::destroyAllWindows();
 }
 
-void cv_imshow(const char* winname, Mat mat) {
-    cv::imshow(winname, *mat);
+bool cv_imshow(const char* winname, Mat mat) {
+    try {
+        cv::imshow(winname, *mat);
+        return true;
+    }
+    catch_exceptions(false);
 }
 
 double cv_get_window_property(const char* winname, int flag) {
