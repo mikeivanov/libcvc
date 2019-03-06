@@ -29,9 +29,8 @@ extern "C" {
 
 #include "core.h"
 
-Points cv_box_points(RotatedRect rect);
-bool cv_cvt_color(Mat src, Mat dst, int code, int dstCn);
-bool cv_blur(Mat src, Mat dst, Size ksize, Point anchor, int borderType);
+bool cv_cvt_color(Mat src, Mat dst, int code, int dst_cn);
+bool cv_blur(Mat src, Mat dst, Size ksize, Point anchor, int border_type);
 bool cv_resize(Mat src, Mat dst, Size dsize, double fx, double fy, int interpolation);
 
 void cv_line(Mat img, Point pt1, Point pt2, Scalar color, int thickness, int line_type, int shift);

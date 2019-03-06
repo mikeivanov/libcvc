@@ -309,6 +309,14 @@ float cv_rotated_rect_angle(RotatedRect self) {
     return self->angle;
 }
 
+Points cv_rotated_rect_points(RotatedRect self) {
+    cv::Point2f pts[4];
+    self->points(pts);
+    return new std::vector<cv::Point2f>(pts, pts + 4);
+}
+
+// RotatedRects (vector)
+
 RotatedRects cv_rotated_rects_new() {
     return new std::vector<cv::RotatedRect>();
 }

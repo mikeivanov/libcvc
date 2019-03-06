@@ -121,6 +121,7 @@ float cv_rotated_rect_y(RotatedRect self);
 float cv_rotated_rect_width(RotatedRect self);
 float cv_rotated_rect_height(RotatedRect self);
 float cv_rotated_rect_angle(RotatedRect self);
+Points cv_rotated_rect_points(RotatedRect self);
 
 RotatedRects cv_rotated_rects_new();
 RotatedRects cv_rotated_rects_new_with_data(int count, const RotatedRect * data);

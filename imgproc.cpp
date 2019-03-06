@@ -1,10 +1,5 @@
 #include "imgproc.h"
 
-Points cv_box_points(RotatedRect rect) {
-    cv::Point2f pts[4];
-    return new std::vector<cv::Point2f>(pts, pts + 4);
-}
-
 bool cv_cvt_color(Mat src, Mat dst, int code, int dstCn) {
     try {
         cv::cvtColor(*src, *dst, code, dstCn);
