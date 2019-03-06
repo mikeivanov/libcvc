@@ -9,6 +9,15 @@
 #ifdef __cplusplus
 #include <opencv2/opencv.hpp>
 extern "C" {
+#else
+#define CV_8U   0
+#define CV_8S   1
+#define CV_16U  2
+#define CV_16S  3
+#define CV_32S  4
+#define CV_32F  5
+#define CV_64F  6
+#define CV_16F  7
 #endif
 
 #ifdef __cplusplus
