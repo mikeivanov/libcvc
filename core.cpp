@@ -61,9 +61,9 @@ Mat cv_mat_new_with_scalar(Ints shape, int type, Scalar scalar) {
     catch_exceptions(nullptr);
 }
 
-Mat cv_mat_new_with_bytes(Ints shape, int type, uchar * bytes) {
+Mat cv_mat_new_with_data(Ints shape, int type, void * data) {
     try {
-        return new cv::Mat(*shape, type, bytes);
+        return new cv::Mat(*shape, type, data);
     }
     catch_exceptions(nullptr);
 }
@@ -101,15 +101,10 @@ bool cv_mat_copy_to_with_mask(Mat self, Mat dst, Mat mask) {
 
 bool cv_mat_convert_to(Mat self, Mat dst, int type, double alpha, double beta) {
     try {
-        self->convertTo(*dst, type);
+        self->convertTo(*dst, type, alpha, beta);
         return true;
     }
     catch_exceptions(false);
-}
-
-Buffer cv_mat_to_buffer(Mat self) {
-    auto data = reinterpret_cast<const uchar*>(self->data);
-    return new std::vector<uchar>(data, data + (self->total() * self->elemSize()));
 }
 
 Mat cv_mat_reshape(Mat self, int cn, Ints shape) {
@@ -155,6 +150,10 @@ int cv_mat_type(Mat self) {
     return self->type();
 }
 
+size_t cv_mat_elem_size(Mat self) {
+    return self->elemSize();
+}
+
 size_t cv_mat_step(Mat self) {
     return self->step;
 }
@@ -175,54 +174,6 @@ Ints cv_mat_size(Mat self) {
     auto n = (size_t) self->size.dims();
     const int * s = self->size;
     return new std::vector<int>(s, s + n);
-}
-
-int32_t cv_mat_get_int(Mat m, const int *idx) {
-    try {
-        switch (m->depth()) {
-            case CV_8U:
-                return m->at<uchar>(idx);
-            case CV_8S:
-                return m->at<schar>(idx);
-            case CV_16U:
-                return m->at<ushort>(idx);
-            case CV_16S:
-                return m->at<short>(idx);
-            case CV_32S:
-                return m->at<int>(idx);
-            case CV_32F:
-                return (int32_t) m->at<float>(idx);
-            case CV_64F:
-                return (int32_t) m->at<double>(idx);
-            default:
-                assert(false);
-        }
-    }
-    catch_exceptions(0x7FFFFFFF);
-}
-
-double cv_mat_get_double(Mat m, const int * idx) {
-    try {
-        switch (m->depth()) {
-            case CV_32F:
-                return m->at<float>(idx);
-            case CV_64F:
-                return m->at<double>(idx);
-            case CV_8U:
-                return m->at<uchar>(idx);
-            case CV_8S:
-                return m->at<schar>(idx);
-            case CV_16U:
-                return m->at<ushort>(idx);
-            case CV_16S:
-                return m->at<short>(idx);
-            case CV_32S:
-                return m->at<int>(idx);
-            default:
-                assert(false);
-        }
-    }
-    catch_exceptions(DBL_MAX);
 }
 
 void * cv_mat_get_ptr(Mat m, const int * idx) {
@@ -249,70 +200,6 @@ void * cv_mat_get_ptr(Mat m, const int * idx) {
     catch_exceptions(nullptr);
 }
 
-bool cv_mat_set_int(Mat m, const int *idx, int val) {
-    try {
-        switch (m->depth()) {
-            case CV_8U:
-                m->at<uchar>(idx) = (uchar) val;
-                break;
-            case CV_8S:
-                m->at<schar>(idx) = (schar) val;
-                break;
-            case CV_16U:
-                m->at<ushort>(idx) = (ushort) val;
-                break;
-            case CV_16S:
-                m->at<short>(idx) = (short) val;
-                break;
-            case CV_32S:
-                m->at<int>(idx) = val;
-                break;
-            case CV_32F:
-                m->at<float>(idx) = val;
-                break;
-            case CV_64F:
-                m->at<double>(idx) = val;
-                break;
-            default:
-                assert(false);
-        }
-        return true;
-    }
-    catch_exceptions(false);
-}
-
-bool cv_mat_set_double(Mat m, const int *idx, double val) {
-    try {
-        switch (m->depth()) {
-            case CV_32F:
-                m->at<float>(idx) = (float) val;
-                break;
-            case CV_64F:
-                m->at<double>(idx) = val;
-                break;
-            case CV_8U:
-                m->at<uchar>(idx) = (uchar) val;
-                break;
-            case CV_8S:
-                m->at<schar>(idx) = (schar) val;
-                break;
-            case CV_16U:
-                m->at<ushort>(idx) = (ushort) val;
-                break;
-            case CV_16S:
-                m->at<short>(idx) = (short) val;
-                break;
-            case CV_32S:
-                m->at<int>(idx) = (int) val;
-                break;
-            default:
-                assert(false);
-        }
-        return true;
-    }
-    catch_exceptions(false);
-}
-
 int64_t cv_get_tick_count() {
     return cv::getTickCount();
 }
@@ -320,3 +207,33 @@ int64_t cv_get_tick_count() {
 double cv_get_tick_frequency() {
     return cv::getTickFrequency();
 }
+
+// array ops -------------------------------
+
+bool cv_extract_channel(Mat src, Mat dst, int coi) {
+    try {
+        cv::extractChannel(*src, *dst, coi);
+        return true;
+    }
+    catch_exceptions(false);
+}
+
+Mat cv_merge(Mats channels) {
+    try {
+        auto mat = new cv::Mat();
+        cv::merge(*channels, *mat);
+        return mat;
+    }
+    catch_exceptions(nullptr);
+}
+
+// matx ops ------------------------
+
+bool cv_mat_add_scalar(Mat mat, Scalar addendum) {
+    try {
+        (*mat) += *addendum;
+        return true;
+    }
+    catch_exceptions(false);
+}
+

@@ -28,29 +28,36 @@ bool cv_dnn_net_set_input(Net net, Mat blob, const char* name, double scale_fact
     catch_exceptions(false);
 }
 
-bool cv_dnn_net_forward(Net net, const char * output_name, Mat output_blob) {
+Mat cv_dnn_net_forward(Net net, const char * output_name) {
     try {
-        auto blob = net->forward(output_name);
-        output_blob->operator=(blob);
+        return new cv::Mat(net->forward());
+    }
+    catch_exceptions(nullptr);
+}
+
+Mats cv_dnn_net_forward_layers(Net net, Strings layer_names) {
+    try {
+        auto blobs = new std::vector<cv::Mat>();
+        net->forward(*blobs, *layer_names);
+        return blobs;
+    }
+    catch_exceptions(nullptr);
+}
+
+bool cv_dnn_net_set_preferable_backend(Net net, int backend) {
+    try {
+        net->setPreferableBackend(backend);
         return true;
     }
     catch_exceptions(false);
 }
 
-bool cv_dnn_net_forward_layers(Net net, Strings layer_names, Mats out_blobs) {
+bool cv_dnn_net_set_preferable_target(Net net, int target) {
     try {
-        net->forward(*out_blobs, *layer_names);
+        net->setPreferableTarget(target);
         return true;
     }
     catch_exceptions(false);
-}
-
-void cv_dnn_net_set_preferable_backend(Net net, int backend) {
-    net->setPreferableBackend(backend);
-}
-
-void cv_dnn_net_set_preferable_target(Net net, int target) {
-    net->setPreferableTarget(target);
 }
 
 int64_t cv_dnn_net_get_perf_profile(Net net, Doubles out_layers) {
@@ -78,11 +85,30 @@ Strings cv_dnn_net_get_layer_names(Net net) {
     return new std::vector<cv::String>(net->getLayerNames());
 }
 
-Layer cv_dnn_net_get_layer(Net net, int layer_id) {
+Layer cv_dnn_net_get_layer_with_name(Net net, const char * layer_name) {
+    try {
+        return new cv::Ptr<cv::dnn::Layer>(net->getLayer(layer_name));
+    }
+    catch_exceptions(nullptr);
+}
+
+Layer cv_dnn_net_get_layer_with_id(Net net, int layer_id) {
     try {
         return new cv::Ptr<cv::dnn::Layer>(net->getLayer(layer_id));
     }
     catch_exceptions(nullptr);
+}
+
+Mats cv_dnn_layer_blobs(Layer layer) {
+    return &((*layer)->blobs);
+}
+
+bool cv_dnn_layer_add_blob(Layer layer, Mat blob) {
+    try {
+        (*layer)->blobs.push_back(*blob);
+        return true;
+    }
+    catch_exceptions(false);
 }
 
 void cv_dnn_layer_free(Layer layer) {

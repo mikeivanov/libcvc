@@ -26,7 +26,7 @@ typedef cv::Rect2f * Rect;
 typedef cv::RotatedRect * RotatedRect;
 typedef std::vector<cv::RotatedRect> * RotatedRects;
 #else
-typedef void * Bytes;
+typedef void * Buffer;
 typedef void * Ints;
 typedef void * Floats;
 typedef void * Doubles;

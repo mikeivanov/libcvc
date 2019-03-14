@@ -3,6 +3,29 @@
 
 #include <stdbool.h>
 
+enum CvBackend
+{
+    //! DNN_BACKEND_DEFAULT equals to DNN_BACKEND_INFERENCE_ENGINE if
+    //! OpenCV is built with Intel's Inference Engine library or
+    //! DNN_BACKEND_OPENCV otherwise.
+    DNN_BACKEND_DEFAULT,
+    DNN_BACKEND_HALIDE,
+    DNN_BACKEND_INFERENCE_ENGINE,
+    DNN_BACKEND_OPENCV,
+    DNN_BACKEND_VKCOM
+};
+
+enum CvTarget
+{
+    DNN_TARGET_CPU,
+    DNN_TARGET_OPENCL,
+    DNN_TARGET_OPENCL_FP16,
+    DNN_TARGET_MYRIAD,
+    DNN_TARGET_VULKAN,
+    //! FPGA device with CPU fallbacks using Inference Engine's Heterogeneous plugin.
+    DNN_TARGET_FPGA
+};
+
 #ifdef __cplusplus
 #include <opencv2/opencv.hpp>
 #include <opencv2/dnn.hpp>
@@ -24,11 +47,11 @@ void cv_dnn_net_free(Net net);
 bool cv_dnn_net_empty(Net net);
 bool cv_dnn_net_set_input(Net net, Mat blob, const char* name, double scale_factor, Scalar mean);
 
-bool cv_dnn_net_forward(Net net, const char * output_name, Mat output_blob);
-bool cv_dnn_net_forward_layers(Net net, Strings layer_names, Mats out_blobs);
+Mat cv_dnn_net_forward(Net net, const char * output_name);
+Mats cv_dnn_net_forward_layers(Net net, Strings layer_names);
 
-void cv_dnn_net_set_preferable_backend(Net net, int backend);
-void cv_dnn_net_set_preferable_target(Net net, int target);
+bool cv_dnn_net_set_preferable_backend(Net net, int backend);
+bool cv_dnn_net_set_preferable_target(Net net, int target);
 int64_t cv_dnn_net_get_perf_profile(Net net, Doubles out_layers);
 
 bool cv_dnn_blob_from_images(Mats images,
@@ -41,8 +64,11 @@ bool cv_dnn_blob_from_images(Mats images,
                              int depth);
 
 Strings cv_dnn_net_get_layer_names(Net net);
-Layer cv_dnn_net_get_layer(Net net, int layerId);
+Layer cv_dnn_net_get_layer_with_name(Net net, const char * layer_name);
+Layer cv_dnn_net_get_layer_with_id(Net net, int layer_id);
 void cv_dnn_layer_free(Layer layer);
+Mats cv_dnn_layer_blobs(Layer layer);
+bool cv_dnn_layer_add_blob(Layer layer, Mat blob);
 
 int cv_dnn_layer_input_name_to_index(Layer layer, const char * name);
 int cv_dnn_layer_output_name_to_index(Layer layer, const char * name);
