@@ -1,3 +1,7 @@
+// This file is a part of the LibCVC project.
+// It is subject to the license terms in the LICENSE file found
+// in the top-level directory of this distribution.
+
 #include "dnn.h"
 
 Net cv_dnn_read_net(const char * model, const char * config, const char * framework) {

@@ -1,3 +1,7 @@
+// This file is a part of the LibCVC project.
+// It is subject to the license terms in the LICENSE file found
+// in the top-level directory of this distribution.
+
 #ifndef CVC_IMGPROC_H
 #define CVC_IMGPROC_H
 

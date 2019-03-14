@@ -1,3 +1,7 @@
+// This file is a part of the LibCVC project.
+// It is subject to the license terms in the LICENSE file found
+// in the top-level directory of this distribution.
+
 #include "imgproc.h"
 
 bool cv_cvt_color(Mat src, Mat dst, int code, int dstCn) {
