@@ -78,3 +78,10 @@ bool cv_put_text(Mat img, const char* text, Point org, int fontFace, double font
     catch_exceptions(false);
 }
 
+bool cv_median_blur(Mat input, Mat output, int ksize) {
+    try {
+        cv::medianBlur(*input, *output, ksize);
+        return true;
+    }
+    catch_exceptions(false);
+}

@@ -241,3 +241,11 @@ bool cv_mat_add_scalar(Mat mat, Scalar addendum) {
     catch_exceptions(false);
 }
 
+bool cv_mat_mul_const(Mat mat, double multiplier) {
+    try {
+        (*mat) *= multiplier;
+        return true;
+    }
+    catch_exceptions(false);
+}
+

@@ -96,6 +96,7 @@ Mat cv_merge(Mats channels);
 // matx ops
 
 bool cv_mat_add_scalar(Mat mat, Scalar addendum);
+bool cv_mat_mul_const(Mat mat, double multiplier);
 
 #ifdef __cplusplus
 }

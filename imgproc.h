@@ -272,6 +272,8 @@ Size cv_get_text_size(const char* text, int font_face, double font_scale, int th
 bool cv_put_text(Mat img, const char* text, Point org, int font_face, double font_scale,
                  Scalar color, int thickness, int line_type, bool bottom_left_origin);
 
+bool cv_median_blur(Mat input, Mat output, int ksize);
+
 #ifdef __cplusplus
 }
 #endif
