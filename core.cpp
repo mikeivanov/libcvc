@@ -79,9 +79,9 @@ Mat cv_mat_new_with_data(Ints shape, int type, void * data) {
     catch_exceptions(nullptr);
 }
 
-Mat cv_mat_copy(Mat self) {
+Mat cv_mat_new_with_roi(Mat self, Rect roi) {
     try {
-        return new cv::Mat(*self);
+        return new cv::Mat(*self, *roi);
     }
     catch_exceptions(nullptr);
 }
@@ -240,6 +240,14 @@ Mat cv_merge(Mats channels) {
 
 // matx ops ------------------------
 
+bool cv_mat_add_mat(Mat mat, Mat addendum) {
+    try {
+        (*mat) += *addendum;
+        return true;
+    }
+    catch_exceptions(false);
+}
+
 bool cv_mat_add_scalar(Mat mat, Scalar addendum) {
     try {
         (*mat) += *addendum;
@@ -256,3 +264,10 @@ bool cv_mat_mul_const(Mat mat, double multiplier) {
     catch_exceptions(false);
 }
 
+bool cv_mat_dot(Mat self, Mat m, double * out) {
+    try {
+        *out = self->dot(*m);
+        return true;
+    }
+    catch_exceptions(false);
+}
