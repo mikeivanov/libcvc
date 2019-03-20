@@ -39,6 +39,7 @@ typedef int mat_type_t;
 // Mats ------------------------------------------------------------
 
 Mats cv_mats_new();
+Mats cv_mats_new_copy(Mats self);
 Mats cv_mats_new_with_data(int size, const Mat * data);
 void cv_mats_free(Mats self);
 Mats cv_mats_add(Mats self, Mat mat);
@@ -54,6 +55,7 @@ int cv_type_channels(int type);
 // Mat --------------------------------------------------------
 
 Mat cv_mat_new();
+Mat cv_mat_new_copy(Mat self);
 Mat cv_mat_new_with_scalar(Ints shape, int type, Scalar scalar);
 Mat cv_mat_new_with_data(Ints shape, int type, void * data);
 Mat cv_mat_copy(Mat self);

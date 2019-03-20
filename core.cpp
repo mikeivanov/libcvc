@@ -9,16 +9,16 @@ Mats cv_mats_new() {
     return new std::vector<cv::Mat>;
 }
 
+Mats cv_mats_new_copy(Mats self) {
+    return new std::vector<cv::Mat>(*self);
+}
+
 Mats cv_mats_new_with_data(int count, const Mat * data) {
     auto vec = new std::vector<cv::Mat>();
     for (int i = 0; i < count; i++) {
         vec->emplace_back(*(data[i]));
     }
     return vec;
-}
-
-Mat cv_mats_copy(Mat self) {
-    return new cv::Mat(*self);
 }
 
 Mats cv_mats_add(Mats self, Mat mat) {
@@ -56,6 +56,13 @@ int cv_type_channels(int type) {
 
 Mat cv_mat_new() {
     return new cv::Mat();
+}
+
+Mat cv_mat_new_copy(Mat self) {
+    try {
+        return new cv::Mat(*self);
+    }
+    catch_exceptions(nullptr);
 }
 
 Mat cv_mat_new_with_scalar(Ints shape, int type, Scalar scalar) {
