@@ -49,3 +49,10 @@ void cv_resize_window(const char* winname, int width, int height) {
     cv::resizeWindow(winname, width, height);
 }
 
+bool cv_set_mouse_callback(const char * winname, MouseCallback on_mouse, void * userdata) {
+    try {
+        cv::setMouseCallback(winname, on_mouse, userdata);
+        return true;
+    }
+    catch_exceptions(false);
+}
