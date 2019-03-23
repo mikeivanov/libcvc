@@ -1,7 +1,7 @@
 # LibCVC
 
-An experimental pure-C binding to OpenCV 4. 
-Intended to be used with libffi. Incomplete. Pre-alpha quality.
+An experimental pure-C binding to [OpenCV 4](https://opencv.org/). 
+Intended to be used with [libffi](https://sourceware.org/libffi/). Incomplete. Pre-alpha quality.
 
 License: MIT.
 
@@ -9,13 +9,12 @@ License: MIT.
 
   1. Install OpenCV v 4.0.1 or later
   2. Checkout the repositiry
-  3. Then:
-
-        $ mkdir build && cd build
-        $ cmake ..
-        $ make
-
-    This will generate `libcvc.so`. 
+  3. Build `libcvc.so`:
+  
+    $ mkdir build && cd build
+    $ cmake ..
+    $ make
+    
   4. Rename it to `libcvc.so.0.1` (yes, I know, but this is not important at this point).
   5. Either copy `libcvc.so.0.1` to `/usr/local/lib64` or 
      `export LD_LIBRARY_PATH=$(pwd):$LD_LIBRARY_PATH`.
@@ -40,7 +39,7 @@ Because it is the only practical way of making libraries callable via libffi.
 
 ### Why libffi?
 
-Libffi is a de-facto standard and is available in virtually all
+[Libffi](https://sourceware.org/libffi/) is a de-facto standard and is available in virtually all
 scripting languages.
 
 ### But most of the scripting lagnuages support C++ extensions (like RCpp). So, why C/libffi?
@@ -70,6 +69,6 @@ There is a Common Lisp wrapper - https://github.com/mikeivanov/see
 ## Other Projects
 
 There is yet another project that includes pure C bindings to OpenCV
--- GoCV (https://github.com/hybridgroup/gocv). Although a couple of
+-- [GoCV](https://github.com/hybridgroup/gocv). Although a couple of
 technical ideas were borrowed from GoCV, it is a completely separate
 effort with different goals.
