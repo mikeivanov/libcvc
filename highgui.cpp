@@ -5,54 +5,68 @@
 #include "highgui.h"
 
 // Window
-void cv_named_window(const char* winname, int flags) {
-    cv::namedWindow(winname, flags);
+error_t cv_named_window(const char* winname, int flags) {
+    try_
+        cv::namedWindow(winname, flags);
+    end_
 }
 
-void cv_destroy_window(const char* winname) {
-    cv::destroyWindow(winname);
+error_t cv_destroy_window(const char* winname) {
+    try_
+        cv::destroyWindow(winname);
+    end_
 }
 
-void cv_destroy_all_windows() {
-    cv::destroyAllWindows();
+error_t cv_destroy_all_windows() {
+    try_
+        cv::destroyAllWindows();
+    end_
 }
 
-bool cv_imshow(const char* winname, Mat mat) {
-    try {
+error_t cv_imshow(const char* winname, Mat mat) {
+    try_
         cv::imshow(winname, *mat);
-        return true;
-    }
-    catch_exceptions(false);
+    end_
 }
 
-double cv_get_window_property(const char* winname, int flag) {
-    return cv::getWindowProperty(winname, flag);
+error_t cv_get_window_property(const char* winname, int flag, double * out_value) {
+    try_
+        *out_value = cv::getWindowProperty(winname, flag);
+    end_
 }
 
-void cv_set_window_property(const char* winname, int flag, double value) {
-    cv::setWindowProperty(winname, flag, value);
+error_t cv_set_window_property(const char* winname, int flag, double value) {
+    try_
+        cv::setWindowProperty(winname, flag, value);
+    end_
 }
 
-void cv_set_window_title(const char* winname, const char* title) {
-    cv::setWindowTitle(winname, title);
+error_t cv_set_window_title(const char* winname, const char* title) {
+    try_
+        cv::setWindowTitle(winname, title);
+    end_
 }
 
-int cv_wait_key(int delay) {
-    return cv::waitKey(delay);
+error_t cv_wait_key(int delay, int * out_key) {
+    try_
+        *out_key = cv::waitKey(delay);
+    end_
 }
 
-void cv_move_window(const char* winname, int x, int y) {
-    cv::moveWindow(winname, x, y);
+error_t cv_move_window(const char* winname, int x, int y) {
+    try_
+        cv::moveWindow(winname, x, y);
+    end_
 }
 
-void cv_resize_window(const char* winname, int width, int height) {
-    cv::resizeWindow(winname, width, height);
+error_t cv_resize_window(const char* winname, int width, int height) {
+    try_
+        cv::resizeWindow(winname, width, height);
+    end_
 }
 
-bool cv_set_mouse_callback(const char * winname, MouseCallback on_mouse, void * userdata) {
-    try {
+error_t cv_set_mouse_callback(const char * winname, MouseCallback on_mouse, void * userdata) {
+    try_
         cv::setMouseCallback(winname, on_mouse, userdata);
-        return true;
-    }
-    catch_exceptions(false);
+    end_
 }

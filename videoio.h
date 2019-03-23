@@ -55,28 +55,23 @@ typedef void* VideoCapture;
 typedef void* VideoWriter;
 #endif
 
-// VideoCapture
-VideoCapture cv_video_capture_new();
-void cv_video_capture_free(VideoCapture v);
-
-bool cv_video_capture_open_uri(VideoCapture v, const char* uri, int api_preference);
-bool cv_video_capture_open_device(VideoCapture v, int device, int api_preference);
-void cv_video_capture_set(VideoCapture v, int prop, double param);
-double cv_video_capture_get(VideoCapture v, int prop);
-bool cv_video_capture_is_opened(VideoCapture v);
-bool cv_video_capture_read(VideoCapture v, Mat buf);
-bool cv_video_capture_grab(VideoCapture v);
-bool cv_video_capture_retrieve(VideoCapture v, Mat buf, int flag);
-
-// VideoWriter
-VideoWriter cv_video_writer_new();
-void cv_video_writer_free(VideoWriter vw);
-
-int cv_video_writer_fourcc(char c1, char c2, char c3, char c4);
-bool cv_video_writer_open(VideoWriter vw, const char* name, int fourcc,
-                          double fps, Size size, bool isColor);
-bool cv_video_writer_is_opened(VideoWriter vw);
-bool cv_video_writer_write(VideoWriter vw, Mat img);
+error_t cv_video_capture_new(VideoCapture * out_capture);
+error_t cv_video_capture_free(VideoCapture v);
+error_t cv_video_capture_open_uri(VideoCapture v, const char* uri, int api_preference);
+error_t cv_video_capture_open_device(VideoCapture v, int device, int api_preference);
+error_t cv_video_capture_set(VideoCapture v, int prop, double param);
+error_t cv_video_capture_get(VideoCapture v, int prop, double * out_value);
+error_t cv_video_capture_is_opened(VideoCapture v, bool * out_value);
+error_t cv_video_capture_read(VideoCapture v, Mat buf, bool * out_value);
+error_t cv_video_capture_grab(VideoCapture v, bool * out_value);
+error_t cv_video_capture_retrieve(VideoCapture v, Mat buf, int flag, bool * out_value);
+error_t cv_video_writer_new(VideoWriter * out_writer);
+error_t cv_video_writer_free(VideoWriter vw);
+error_t cv_video_writer_fourcc(char c1, char c2, char c3, char c4, int * out_value);
+error_t cv_video_writer_open(VideoWriter vw, const char* name, int fourcc,
+                             double fps, Size size, bool is_color);
+error_t cv_video_writer_is_opened(VideoWriter vw, bool * out_value);
+error_t cv_video_writer_write(VideoWriter vw, Mat img);
 
 #ifdef __cplusplus
 }

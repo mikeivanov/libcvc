@@ -34,73 +34,64 @@ typedef void * Mat;
 typedef void * Mats;
 #endif
 
-typedef int mat_type_t;
+// Mats ------------
 
-// Mats ------------------------------------------------------------
+error_t cv_mats_new(Mats * out_new_mats);
+error_t cv_mats_new_copy(Mats mats, Mats * out_new_mats);
+error_t cv_mats_new_with_data(int count, const Mat * data, Mats * out_new_mats);
+error_t cv_mats_add(Mats self, Mat mat);
+error_t cv_mats_free(Mats self);
+error_t cv_mats_count(Mats self, int * out_count);
+error_t cv_mats_get(Mats self, int i, Mat * out_mat_ref);
 
-Mats cv_mats_new();
-Mats cv_mats_new_copy(Mats self);
-Mats cv_mats_new_with_data(int size, const Mat * data);
-void cv_mats_free(Mats self);
-Mats cv_mats_add(Mats self, Mat mat);
-int cv_mats_count(Mats self);
-Mat cv_mats_get(Mats self, int i);
+// Type ---------------------
 
-// Type ------------------------------------------
+error_t cv_make_type(int depth, int channels, int * out_type);
+error_t cv_type_depth(int type, int * out_depth);
+error_t cv_type_channels(int type, int * out_channels);
 
-int cv_make_type(int depth, int channels);
-int cv_type_depth(int type);
-int cv_type_channels(int type);
+// Mat ----------------------
 
-// Mat --------------------------------------------------------
+error_t cv_mat_new(Mat * out_new_mat);
+error_t cv_mat_new_copy(Mat self, Mat * out_new_mat);
+error_t cv_mat_new_with_scalar(Ints shape, int type, Scalar scalar, Mat * out_new_mat);
+error_t cv_mat_new_with_data(Ints shape, int type, void * data, Mat * out_new_mat);
+error_t cv_mat_new_with_roi(Mat source, Rect roi, Mat * out_new_mat);
+error_t cv_mat_free(Mat self);
+error_t cv_mat_empty(Mat self, bool * out_value);
+error_t cv_mat_copy_to(Mat self, Mat dst);
+error_t cv_mat_copy_to_with_mask(Mat self, Mat dst, Mat mask);
+error_t cv_mat_convert_to(Mat self, Mat dst, int type, double alpha, double beta);
+error_t cv_mat_reshape(Mat self, int cn, Ints shape, Mat out_mat);
+error_t cv_mat_patch_nans(Mat self, double val);
+error_t cv_mat_mean(Mat self, Scalar out_scalar);
+error_t cv_mat_lut(Mat self, Mat lut, Mat dst);
+error_t cv_mat_rows(Mat self, int * out_rows);
+error_t cv_mat_cols(Mat self, int * out_cols);
+error_t cv_mat_channels(Mat self, int * out_channels);
+error_t cv_mat_depth(Mat self, int * out_depth);
+error_t cv_mat_type(Mat self, int * out_type);
+error_t cv_mat_elem_size(Mat self, size_t * out_size);
+error_t cv_mat_step(Mat self, size_t * out_step);
+error_t cv_mat_is_continuous(Mat self, bool * out_continuous);
+error_t cv_mat_total(Mat self, size_t * out_total);
+error_t cv_mat_dims(Mat self, size_t * out_dims);
+error_t cv_mat_size(Mat self, Ints out_size);
+error_t cv_mat_get_ptr(Mat m, const int * idx, void ** out_ptr);
+error_t cv_get_tick_count(int64_t * out_count);
+error_t cv_get_tick_frequency(double * out_freq);
 
-Mat cv_mat_new();
-Mat cv_mat_new_copy(Mat self);
-Mat cv_mat_new_with_scalar(Ints shape, int type, Scalar scalar);
-Mat cv_mat_new_with_data(Ints shape, int type, void * data);
-Mat cv_mat_new_with_roi(Mat self, Rect roi);
-void cv_mat_free(Mat m);
+// array ops -------------------------------
 
-bool cv_mat_empty(Mat m);
+error_t cv_extract_channel(Mat src, Mat dst, int coi);
+error_t cv_merge(Mats channels, Mat out_mat);
 
-bool cv_mat_copy_to(Mat m, Mat dst);
-bool cv_mat_copy_to_with_mask(Mat m, Mat dst, Mat mask);
-bool cv_mat_convert_to(Mat self, Mat dst, int type, double alpha, double beta);
+// matx ops ------------------------
 
-void cv_mat_patch_nans(Mat m, double val);
-Scalar cv_mat_mean(Mat m);
-bool cv_mat_lut(Mat src, Mat lut, Mat dst);
-
-int cv_mat_channels(Mat m);
-int cv_mat_depth(Mat m);
-int cv_mat_type(Mat m);
-size_t cv_mat_elem_size(Mat self);
-size_t cv_mat_step(Mat m);
-bool cv_mat_is_continuous(Mat m);
-size_t cv_mat_total(Mat m);
-int cv_mat_dims(Mat m);
-Ints cv_mat_size(Mat self);
-int cv_mat_rows(Mat m);
-int cv_mat_cols(Mat m);
-
-Mat cv_mat_reshape(Mat m, int cn, Ints shape);
-
-void * cv_mat_get_ptr(Mat m, const int * idx);
-
-int64_t cv_get_tick_count();
-double cv_get_tick_frequency();
-
-// arrays
-
-bool cv_extract_channel(Mat src, Mat dst, int coi);
-Mat cv_merge(Mats channels);
-
-// matx ops
-
-bool cv_mat_add_mat(Mat mat, Mat addendum);
-bool cv_mat_add_scalar(Mat mat, Scalar addendum);
-bool cv_mat_mul_const(Mat mat, double multiplier);
-bool cv_mat_dot(Mat self, Mat m, double * out);
+error_t cv_mat_add_mat(Mat mat, Mat addendum);
+error_t cv_mat_add_scalar(Mat mat, Scalar addendum);
+error_t cv_mat_mul_const(Mat mat, double multiplier);
+error_t cv_mat_dot(Mat self, Mat m, double * out);
 
 
 #ifdef __cplusplus

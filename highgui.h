@@ -38,24 +38,21 @@ extern "C" {
 
 #ifdef __cplusplus
 typedef cv::MouseCallback MouseCallback;
-typedef std::vector<cv::Mat> * Mats;
 #else
 typedef void(*MouseCallback) (int event, int x, int y, int flags, void *userdata);
 #endif
 
-
-void cv_named_window(const char* winname, int flags);
-void cv_destroy_window(const char* winname);
-void cv_destroy_all_windows();
-bool cv_imshow(const char* winname, Mat mat);
-double cv_get_window_property(const char* winname, int flag);
-void cv_set_window_property(const char* winname, int flag, double value);
-void cv_set_window_title(const char* winname, const char* title);
-int cv_wait_key(int delay);
-void cv_move_window(const char* winname, int x, int y);
-void cv_resize_window(const char* winname, int width, int height);
-
-bool cv_set_mouse_callback(const char * winname, MouseCallback on_mouse, void * userdata);
+error_t cv_named_window(const char* winname, int flags);
+error_t cv_destroy_window(const char* winname);
+error_t cv_destroy_all_windows();
+error_t cv_imshow(const char* winname, Mat mat);
+error_t cv_get_window_property(const char* winname, int flag, double * out_value);
+error_t cv_set_window_property(const char* winname, int flag, double value);
+error_t cv_set_window_title(const char* winname, const char* title);
+error_t cv_wait_key(int delay, int * out_key);
+error_t cv_move_window(const char* winname, int x, int y);
+error_t cv_resize_window(const char* winname, int width, int height);
+error_t cv_set_mouse_callback(const char * winname, MouseCallback on_mouse, void * userdata);
 
 #ifdef __cplusplus
 }

@@ -4,54 +4,62 @@
 
 #include "imgcodecs.h"
 
-Mat cv_imread(const char * filename, int flags) {
-    try {
+error_t cv_imread(const char * filename, int flags, Mat out_img) {
+    try_
         cv::Mat img = cv::imread(filename, flags);
         if (img.empty()) {
-            cv_set_error("Can't read image.");
-            return nullptr;
-        } else {
-            return new cv::Mat(img);
+            return cv_set_error(OTHER_ERROR, "Cannot read image");
         }
-    }
-    catch_exceptions(nullptr);
+        out_img->operator=(img);
+    end_
 }
 
-Mat cv_imdecode(Buffer buf, int flags) {
-    try {
-        cv::Mat img = cv::imdecode(*buf, flags);
-        if (img.empty()) {
-            cv_set_error("Can't decode image.");
-            return nullptr;
-        } else {
-            return new cv::Mat(img);
+error_t cv_imread_multi(const char * filename, Mats mats, int flags) {
+    try_
+        auto ok = imreadmulti(filename, *mats, flags);
+        if (!ok) {
+            return cv_set_error(OTHER_ERROR, "Cannot read image");
         }
-    }
-    catch_exceptions(nullptr);
+    end_
 }
 
-bool cv_imwrite(const char* filename, Mat img, Ints params) {
-    try {
-        auto result = cv::imwrite(filename, *img, *params);
-        if (!result) {
-            cv_set_error("Can't write image.");
+error_t cv_imdecode(Buffer buf, int flags, Mat out_img) {
+    try_
+        cv::imdecode(*buf, flags, out_img);
+        if (out_img->empty()) {
+            return cv_set_error(OTHER_ERROR, "Cannot decode image");
         }
-        return result;
-    }
-    catch_exceptions(false);
+    end_
 }
 
-Buffer cv_imencode(const char * file_ext, Mat img, Ints params) {
-    try {
+error_t cv_imwrite(const char* filename, Mat img, Ints params) {
+    try_
+        auto ok = cv::imwrite(filename, *img, *params);
+        if (!ok) {
+            return cv_set_error(OTHER_ERROR, "Cannot write image");
+        }
+    end_
+}
+
+error_t cv_imencode(const char * file_ext, Mat img, Ints params, Buffer out_buffer) {
+    try_
         std::vector<uchar> buffer;
-        bool result = cv::imencode(file_ext, *img, buffer, *params);
-        if (result) {
-            return new std::vector<uchar>(buffer);
-        } else {
-            cv_set_error("Can't encode image.");
-            return nullptr;
+        auto ok = cv::imencode(file_ext, *img, buffer, *params);
+        if (!ok) {
+            return cv_set_error(OTHER_ERROR, "Cannot encode image");
         }
-    }
-    catch_exceptions(nullptr);
+        out_buffer->operator=(buffer);
+    end_
 }
 
+error_t cv_have_image_reader(const char * filename, bool * out_result) {
+    try_
+        *out_result = cv::haveImageReader(filename);
+    end_
+}
+
+error_t cv_have_image_writer(const char * filename, bool * out_result) {
+    try_
+        *out_result = cv::haveImageWriter(filename);
+    end_
+}

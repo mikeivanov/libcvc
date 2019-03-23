@@ -4,84 +4,81 @@
 
 #include "imgproc.h"
 
-bool cv_cvt_color(Mat src, Mat dst, int code, int dstCn) {
-    try {
+error_t cv_cvt_color(Mat src, Mat dst, int code, int dstCn) {
+    try_
         cv::cvtColor(*src, *dst, code, dstCn);
-        return true;
-    }
-    catch_exceptions(false);
+    end_
 }
 
-bool cv_blur(Mat src, Mat dst, Size ksize, Point anchor, int borderType) {
-    try {
+error_t cv_blur(Mat src, Mat dst, Size ksize, Point anchor, int borderType) {
+    try_
         cv::blur(*src, *dst, *ksize, *anchor, borderType);
-        return true;
-    }
-    catch_exceptions(false);
+    end_
 }
 
-bool cv_resize(Mat src, Mat dst, Size dsize, double fx, double fy, int interpolation) {
-    try {
+error_t cv_resize(Mat src, Mat dst, Size dsize, double fx, double fy, int interpolation) {
+    try_
         cv::resize(*src, *dst, *dsize, fx, fy, interpolation);
-        return true;
-    }
-    catch_exceptions(false);
+    end_
 }
 
-void cv_line(Mat img, Point pt1, Point pt2, Scalar color, int thickness, int line_type, int shift) {
-    cv::line(*img, *pt1, *pt2, *color, thickness, line_type, shift);
+error_t cv_line(Mat img, Point pt1, Point pt2, Scalar color, int thickness, int line_type, int shift) {
+    try_
+        cv::line(*img, *pt1, *pt2, *color, thickness, line_type, shift);
+    end_
 }
 
-void cv_arrowed_line(Mat img, Point pt1, Point pt2, Scalar color,
+error_t cv_arrowed_line(Mat img, Point pt1, Point pt2, Scalar color,
                      int thickness, int line_type, int shift, double tipLength)
 {
-    cv::arrowedLine(*img, *pt1, *pt2, *color,
-                    thickness, line_type, shift, tipLength);
+    try_
+        cv::arrowedLine(*img, *pt1, *pt2, *color,
+                        thickness, line_type, shift, tipLength);
+    end_
 }
 
-void cv_circle(Mat img, Point center, int radius, Scalar color, int thickness, int lineType, int shift) {
-    cv::circle(*img, *center, radius, *color, thickness, lineType, shift);
+error_t cv_circle(Mat img, Point center, int radius, Scalar color, int thickness, int lineType, int shift) {
+    try_
+        cv::circle(*img, *center, radius, *color, thickness, lineType, shift);
+    end_
 }
 
-void cv_ellipse(Mat img, Point center, Size axes,
-                double angle, double startAngle, double endAngle,
-                Scalar color, int thickness, int lineType, int shift)
+error_t cv_ellipse(Mat img, Point center, Size axes,
+                   double angle, double startAngle, double endAngle,
+                   Scalar color, int thickness, int lineType, int shift)
 {
-    cv::ellipse(*img, *center, *axes,
-                angle, startAngle, endAngle, *color, thickness, lineType, shift);
+    try_
+        cv::ellipse(*img, *center, *axes,
+                    angle, startAngle, endAngle, *color, thickness, lineType, shift);
+    end_
 }
 
-void cv_rectangle(Mat img, Rect rect, Scalar color, int thickness, int lineType, int shift) {
-    cv::rectangle(*img, *rect, *color, thickness, lineType, shift);
+error_t cv_rectangle(Mat img, Rect rect, Scalar color, int thickness, int lineType, int shift) {
+    try_
+        cv::rectangle(*img, *rect, *color, thickness, lineType, shift);
+    end_
 }
 
-Size cv_get_text_size(const char* text, int fontFace, double fontScale, int thickness, int * baseLine) {
-    try {
-        int out_baseline = 0;
-        auto size = cv::getTextSize(text, fontFace, fontScale, thickness, &out_baseline);
-        if (baseLine != nullptr) {
-            *baseLine = out_baseline;
-        }
-        return new cv::Size2f(size);
-    }
-    catch_exceptions(nullptr);
-}
-
-bool cv_put_text(Mat img, const char* text, Point org, int fontFace, double fontScale,
-                 Scalar color, int thickness, int lineType, bool bottomLeftOrigin)
+error_t cv_get_text_size(const char* text, int fontFace, double fontScale, int thickness,
+                         int * out_baseline, Size out_size)
 {
-    try {
+    try_
+        auto size = cv::getTextSize(text, fontFace, fontScale, thickness, out_baseline);
+        out_size->operator=(size);
+    end_
+}
+
+error_t cv_put_text(Mat img, const char* text, Point org, int fontFace, double fontScale,
+                    Scalar color, int thickness, int lineType, bool bottomLeftOrigin)
+{
+    try_
         cv::putText(*img, text, *org, fontFace, fontScale,
                     *color, thickness, lineType, bottomLeftOrigin);
-        return true;
-    }
-    catch_exceptions(false);
+    end_
 }
 
-bool cv_median_blur(Mat input, Mat output, int ksize) {
-    try {
+error_t cv_median_blur(Mat input, Mat output, int ksize) {
+    try_
         cv::medianBlur(*input, *output, ksize);
-        return true;
-    }
-    catch_exceptions(false);
+    end_
 }
