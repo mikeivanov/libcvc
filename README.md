@@ -66,3 +66,10 @@ most specific one is wrapped.
 ### Which languages/projects use LibCVC?
 
 There is a Common Lisp wrapper - https://github.com/mikeivanov/see
+
+## Other Projects
+
+There is yet another project that includes pure C bindings to OpenCV
+-- GoCV (https://github.com/hybridgroup/gocv). Although a couple of
+technical ideas were borrowed from GoCV, it is a completely separate
+effort with different goals.
