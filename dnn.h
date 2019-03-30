@@ -6,6 +6,7 @@
 #define CVC_DNN_H
 
 #include <stdbool.h>
+#include "core.h"
 
 enum CvBackend
 {
@@ -31,20 +32,20 @@ enum CvTarget
 };
 
 #ifdef __cplusplus
+
 #include <opencv2/opencv.hpp>
 #include <opencv2/dnn.hpp>
-extern "C" {
-#endif
-
-#include "core.h"
-
-#ifdef __cplusplus
 
 typedef cv::dnn::Net * Net;
 typedef cv::Ptr<cv::dnn::Layer> * Layer;
+
+extern "C" {
+
 #else
+
 typedef void* Net;
 typedef void* Layer;
+
 #endif
 
 error_t cv_dnn_read_net(const char * model, const char * config, const char * framework, Net * out_net);

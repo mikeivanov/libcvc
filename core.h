@@ -7,7 +7,6 @@
 
 #include <stdint.h>
 #include <stdbool.h>
-
 #include "types.h"
 
 enum CvDepths {
@@ -22,17 +21,21 @@ enum CvDepths {
 };
 
 #ifdef __cplusplus
-#include <opencv2/opencv.hpp>
-extern "C" {
-#endif
 
-#ifdef __cplusplus
+#include <opencv2/opencv.hpp>
+
 typedef cv::Mat * Mat;
 typedef std::vector<cv::Mat> * Mats;
+
+extern "C" {
+
 #else
+
 typedef void * Mat;
 typedef void * Mats;
+
 #endif
+
 
 // Mats ------------
 

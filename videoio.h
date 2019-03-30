@@ -5,6 +5,8 @@
 #ifndef CVC_VIDEOIO_H
 #define CVC_VIDEOIO_H
 
+#include "core.h"
+
 enum CvVideoCaptureAPIs {
     CAP_ANY          = 0,            //!< Auto detect == 0
     CAP_VFW          = 200,          //!< Video For Windows (obsolete, removed)
@@ -44,8 +46,6 @@ enum CvVideoCaptureAPIs {
 #include <opencv2/opencv.hpp>
 extern "C" {
 #endif
-
-#include "core.h"
 
 #ifdef __cplusplus
 typedef cv::VideoCapture* VideoCapture;

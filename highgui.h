@@ -5,6 +5,8 @@
 #ifndef CVC_HIGHGUI_H
 #define CVC_HIGHGUI_H
 
+#include "core.h"
+
 enum CvMouseEventTypes {
     EVENT_MOUSEMOVE = 0,
     EVENT_LBUTTONDOWN = 1,
@@ -30,16 +32,15 @@ enum CvMouseEventFlags {
 };
 
 #ifdef __cplusplus
-#include <opencv2/opencv.hpp>
-extern "C" {
-#endif
 
-#include "core.h"
-
-#ifdef __cplusplus
 typedef cv::MouseCallback MouseCallback;
+
+extern "C" {
+
 #else
+
 typedef void(*MouseCallback) (int event, int x, int y, int flags, void *userdata);
+
 #endif
 
 error_t cv_named_window(const char* winname, int flags);

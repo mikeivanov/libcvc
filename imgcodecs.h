@@ -6,6 +6,7 @@
 #define CVC_IMGCODECS_H
 
 #include <stdbool.h>
+#include "core.h"
 
 enum CvImreadModes {
     IMREAD_UNCHANGED = -1,
@@ -67,11 +68,12 @@ enum CvImwriteFlags {
 };
 
 #ifdef __cplusplus
-#include <opencv2/opencv.hpp>
-extern "C" {
-#endif
 
-#include "core.h"
+#include <opencv2/opencv.hpp>
+
+extern "C" {
+
+#endif
 
 error_t cv_imread(const char * filename, int flags, Mat out_img);
 error_t cv_imread_multi(const char * filename, Mats mats, int flags);

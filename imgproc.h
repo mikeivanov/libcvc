@@ -6,6 +6,7 @@
 #define CVC_IMGPROC_H
 
 #include <stdbool.h>
+#include "core.h"
 
 enum CvLineTypes {
     FILLED  = -1,
@@ -249,11 +250,12 @@ enum CvInterpolationFlags {
 };
 
 #ifdef __cplusplus
-#include <opencv2/opencv.hpp>
-extern "C" {
-#endif
 
-#include "core.h"
+#include <opencv2/opencv.hpp>
+
+extern "C" {
+
+#endif
 
 error_t cv_cvt_color(Mat src, Mat dst, int code, int dstCn);
 error_t cv_blur(Mat src, Mat dst, Size ksize, Point anchor, int borderType);

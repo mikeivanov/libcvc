@@ -17,6 +17,7 @@ enum CvError {
 };
 
 #ifdef __cplusplus
+
 #include <opencv2/opencv.hpp>
 
 #define catch_exceptions(x) \
@@ -44,7 +45,9 @@ typedef std::vector<cv::Point2f> * Points;
 typedef cv::Rect2f * Rect;
 typedef cv::RotatedRect * RotatedRect;
 typedef std::vector<cv::RotatedRect> * RotatedRects;
+
 #else
+
 typedef void * Buffer;
 typedef void * Ints;
 typedef void * Floats;
@@ -57,6 +60,7 @@ typedef void * Points;
 typedef void * Rect;
 typedef void * RotatedRect;
 typedef void * RotatedRects;
+
 #endif
 
 const char * cv_get_error_message();
