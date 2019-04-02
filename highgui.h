@@ -7,30 +7,6 @@
 
 #include "core.h"
 
-enum CvMouseEventTypes {
-    EVENT_MOUSEMOVE = 0,
-    EVENT_LBUTTONDOWN = 1,
-    EVENT_RBUTTONDOWN = 2,
-    EVENT_MBUTTONDOWN = 3,
-    EVENT_LBUTTONUP = 4,
-    EVENT_RBUTTONUP = 5,
-    EVENT_MBUTTONUP = 6,
-    EVENT_LBUTTONDBLCLK = 7,
-    EVENT_RBUTTONDBLCLK = 8,
-    EVENT_MBUTTONDBLCLK = 9,
-    EVENT_MOUSEWHEEL = 10,
-    EVENT_MOUSEHWHEEL = 11
-};
-
-enum CvMouseEventFlags {
-    EVENT_FLAG_LBUTTON = 1,
-    EVENT_FLAG_RBUTTON = 2,
-    EVENT_FLAG_MBUTTON = 4,
-    EVENT_FLAG_CTRLKEY = 8,
-    EVENT_FLAG_SHIFTKEY = 16,
-    EVENT_FLAG_ALTKEY = 32
-};
-
 #ifdef __cplusplus
 
 typedef cv::MouseCallback MouseCallback;
@@ -42,6 +18,9 @@ extern "C" {
 typedef void(*MouseCallback) (int event, int x, int y, int flags, void *userdata);
 
 #endif
+
+extern CvEnum cv_mouse_event_types_enum[];
+extern CvEnum cv_mouse_event_flags_enum[];
 
 error_t cv_named_window(const char* winname, int flags);
 error_t cv_destroy_window(const char* winname);

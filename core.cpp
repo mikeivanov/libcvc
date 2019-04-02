@@ -2,8 +2,20 @@
 // It is subject to the license terms in the LICENSE file found
 // in the top-level directory of this distribution.
 
-#include "core.h"
 #include <string.h>
+#include "core.h"
+
+CvEnum cv_depth_enum[] = {
+    {"DEPTH_8U",  CV_8U},
+    {"DEPTH_8S",  CV_8S},
+    {"DEPTH_16U", CV_16U},
+    {"DEPTH_16S", CV_16S},
+    {"DEPTH_32S", CV_32S},
+    {"DEPTH_32F", CV_32F},
+    {"DEPTH_64F", CV_64F},
+    {"DEPTH_16F", CV_16F},
+    {nullptr, 0}
+};
 
 error_t cv_mats_new(Mats * out_new_mats) {
     try_

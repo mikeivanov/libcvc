@@ -16,6 +16,11 @@ enum CvError {
     OTHER_ERROR = 1
 };
 
+typedef struct _CvEnum {
+	const char * name;
+	int value;
+} CvEnum;
+
 #ifdef __cplusplus
 
 #include <opencv2/opencv.hpp>

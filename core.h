@@ -9,17 +9,6 @@
 #include <stdbool.h>
 #include "types.h"
 
-enum CvDepths {
-    DEPTH_8U  = 0,
-    DEPTH_8S  = 1,
-    DEPTH_16U = 2,
-    DEPTH_16S = 3,
-    DEPTH_32S = 4,
-    DEPTH_32F = 5,
-    DEPTH_64F = 6,
-    DEPTH_16F = 7
-};
-
 #ifdef __cplusplus
 
 #include <opencv2/opencv.hpp>
@@ -36,6 +25,9 @@ typedef void * Mats;
 
 #endif
 
+// Enums --------------
+
+extern CvEnum cv_depth_enum[];
 
 // Mats ------------
 

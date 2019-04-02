@@ -4,6 +4,42 @@
 
 #include "videoio.h"
 
+CvEnum cv_video_capture_apis_enum[] = {
+    {"CAP_ANY",          cv::CAP_ANY}, 
+    {"CAP_VFW",          cv::CAP_VFW},
+    {"CAP_V4L",          cv::CAP_V4L},
+    {"CAP_V4L2",         cv::CAP_V4L2},
+    {"CAP_FIREWIRE",     cv::CAP_FIREWIRE},
+    {"CAP_FIREWARE",     cv::CAP_FIREWARE},
+    {"CAP_IEEE1394",     cv::CAP_IEEE1394},
+    {"CAP_DC1394",       cv::CAP_DC1394},
+    {"CAP_CMU1394",      cv::CAP_CMU1394},
+    {"CAP_QT",           cv::CAP_QT},
+    {"CAP_UNICAP",       cv::CAP_UNICAP},
+    {"CAP_DSHOW",        cv::CAP_DSHOW},
+    {"CAP_PVAPI",        cv::CAP_PVAPI},
+    {"CAP_OPENNI",       cv::CAP_OPENNI},
+    {"CAP_OPENNI_ASUS",  cv::CAP_OPENNI_ASUS},
+    {"CAP_ANDROID",      cv::CAP_ANDROID},
+    {"CAP_XIAPI",        cv::CAP_XIAPI},
+    {"CAP_AVFOUNDATION", cv::CAP_AVFOUNDATION},
+    {"CAP_GIGANETIX",    cv::CAP_GIGANETIX},
+    {"CAP_MSMF",         cv::CAP_MSMF},
+    {"CAP_WINRT",        cv::CAP_WINRT},
+    {"CAP_INTELPERC",    cv::CAP_INTELPERC},
+    {"CAP_OPENNI2",      cv::CAP_OPENNI2},
+    {"CAP_OPENNI2_ASUS", cv::CAP_OPENNI2_ASUS},
+    {"CAP_GPHOTO2",      cv::CAP_GPHOTO2},
+    {"CAP_GSTREAMER",    cv::CAP_GSTREAMER},
+    {"CAP_FFMPEG",       cv::CAP_FFMPEG},
+    {"CAP_IMAGES",       cv::CAP_IMAGES},
+    {"CAP_ARAVIS",       cv::CAP_ARAVIS},
+    {"CAP_OPENCV_MJPEG", cv::CAP_OPENCV_MJPEG},
+    {"CAP_INTEL_MFX",    cv::CAP_INTEL_MFX},
+    {"CAP_XINE",         cv::CAP_XINE},
+    {nullptr, 0}
+};
+
 error_t cv_video_capture_new(VideoCapture * out_capture) {
     try_
         *out_capture = new cv::VideoCapture();

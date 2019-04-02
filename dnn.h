@@ -8,29 +8,6 @@
 #include <stdbool.h>
 #include "core.h"
 
-enum CvBackend
-{
-    //! DNN_BACKEND_DEFAULT equals to DNN_BACKEND_INFERENCE_ENGINE if
-    //! OpenCV is built with Intel's Inference Engine library or
-    //! DNN_BACKEND_OPENCV otherwise.
-    DNN_BACKEND_DEFAULT,
-    DNN_BACKEND_HALIDE,
-    DNN_BACKEND_INFERENCE_ENGINE,
-    DNN_BACKEND_OPENCV,
-    DNN_BACKEND_VKCOM
-};
-
-enum CvTarget
-{
-    DNN_TARGET_CPU,
-    DNN_TARGET_OPENCL,
-    DNN_TARGET_OPENCL_FP16,
-    DNN_TARGET_MYRIAD,
-    DNN_TARGET_VULKAN,
-    //! FPGA device with CPU fallbacks using Inference Engine's Heterogeneous plugin.
-    DNN_TARGET_FPGA
-};
-
 #ifdef __cplusplus
 
 #include <opencv2/opencv.hpp>
@@ -47,6 +24,9 @@ typedef void* Net;
 typedef void* Layer;
 
 #endif
+
+extern CvEnum cv_dnn_backend_enum[];
+extern CvEnum cv_dnn_target_enum[];
 
 error_t cv_dnn_read_net(const char * model, const char * config, const char * framework, Net * out_net);
 error_t cv_dnn_net_free(Net net);

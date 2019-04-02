@@ -4,6 +4,25 @@
 
 #include "dnn.h"
 
+CvEnum cv_dnn_backend_enum[] = {
+    {"DNN_BACKEND_DEFAULT",          cv::dnn::DNN_BACKEND_DEFAULT},
+    {"DNN_BACKEND_HALIDE",           cv::dnn::DNN_BACKEND_HALIDE},
+    {"DNN_BACKEND_INFERENCE_ENGINE", cv::dnn::DNN_BACKEND_INFERENCE_ENGINE},
+    {"DNN_BACKEND_OPENCV",           cv::dnn::DNN_BACKEND_OPENCV},
+    {"DNN_BACKEND_VKCOM",            cv::dnn::DNN_BACKEND_VKCOM},
+    {nullptr, 0}
+};
+
+CvEnum cv_dnn_target_enum[] = {
+    {"DNN_TARGET_CPU",         cv::dnn::DNN_TARGET_CPU},
+    {"DNN_TARGET_OPENCL",      cv::dnn::DNN_TARGET_OPENCL},
+    {"DNN_TARGET_OPENCL_FP16", cv::dnn::DNN_TARGET_OPENCL_FP16},
+    {"DNN_TARGET_MYRIAD",      cv::dnn::DNN_TARGET_MYRIAD},
+    {"DNN_TARGET_VULKAN",      cv::dnn::DNN_TARGET_VULKAN},
+    {"DNN_TARGET_FPGA",        cv::dnn::DNN_TARGET_FPGA},
+    {nullptr, 0}
+};
+
 error_t cv_dnn_read_net(const char * model, const char * config, const char * framework, Net * out_net) {
     try_
         auto net = cv::dnn::readNet(model, config, framework);
@@ -148,4 +167,3 @@ error_t cv_dnn_nms_boxes(RotatedRects bboxes,
         cv::dnn::NMSBoxes(rboxes, *scores, score_threshold, nms_threshold, *out_indices, eta, top_k);
     end_
 }
-

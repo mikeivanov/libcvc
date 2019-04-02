@@ -4,6 +4,32 @@
 
 #include "highgui.h"
 
+CvEnum cv_mouse_event_types_enum[] = {
+    {"EVENT_MOUSEMOVE",     cv::EVENT_MOUSEMOVE},
+    {"EVENT_LBUTTONDOWN",   cv::EVENT_LBUTTONDOWN},
+    {"EVENT_RBUTTONDOWN",   cv::EVENT_RBUTTONDOWN},
+    {"EVENT_MBUTTONDOWN",   cv::EVENT_MBUTTONDOWN},
+    {"EVENT_LBUTTONUP",     cv::EVENT_LBUTTONUP},
+    {"EVENT_RBUTTONUP",     cv::EVENT_RBUTTONUP},
+    {"EVENT_MBUTTONUP",     cv::EVENT_MBUTTONUP},
+    {"EVENT_LBUTTONDBLCLK", cv::EVENT_LBUTTONDBLCLK},
+    {"EVENT_RBUTTONDBLCLK", cv::EVENT_RBUTTONDBLCLK},
+    {"EVENT_MBUTTONDBLCLK", cv::EVENT_MBUTTONDBLCLK},
+    {"EVENT_MOUSEWHEEL",    cv::EVENT_MOUSEWHEEL},
+    {"EVENT_MOUSEHWHEEL",   cv::EVENT_MOUSEHWHEEL},
+    {nullptr, 0}
+};
+
+CvEnum cv_mouse_event_flags_enum[] = {
+    {"EVENT_FLAG_LBUTTON",  cv::EVENT_FLAG_LBUTTON},
+    {"EVENT_FLAG_RBUTTON",  cv::EVENT_FLAG_RBUTTON},
+    {"EVENT_FLAG_MBUTTON",  cv::EVENT_FLAG_MBUTTON},
+    {"EVENT_FLAG_CTRLKEY",  cv::EVENT_FLAG_CTRLKEY},
+    {"EVENT_FLAG_SHIFTKEY", cv::EVENT_FLAG_SHIFTKEY},
+    {"EVENT_FLAG_ALTKEY",   cv::EVENT_FLAG_ALTKEY},
+    {nullptr, 0}
+};
+
 // Window
 error_t cv_named_window(const char* winname, int flags) {
     try_
